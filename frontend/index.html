@@ -15,7 +15,7 @@
 
 <body>
     <!-- start header -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark nav-bg-color">
         <a class="navbar-brand" href="#">ReviewLKBDorms</a>
         <!-- For responsive design, the navbar-toggler-icon is used to toggle the navbar items when the screen is small. -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -23,17 +23,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- navbarSupportedContent - id of div items in the navbar -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- Search bar - to search for dorms -->
         <form class="form-inline mr-2">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-
         <!-- Button to write a review - navigates to write_review.html -->
         <button type="button" class="btn btn-outline-success">Write a Review</button>
-
-        <!-- navbarSupportedContent - id of div items in the navbar -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- navbarSupportedContent - index, about, signup, login -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
@@ -53,21 +52,29 @@
     <!-- end header -->
 
     <!-- start slider -->
-    <section id="hero-banner">
-        <!-- <div class="banner-inner"> -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-
-                        <h2>Stronger than <b>EVER</b></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisici <br /> Praesent eget risus.</p>
-                        <a class="btn btn-primary btn-lg" href="#">Start Now</a>
-
-                    </div>
-                </div>
+    <section class="hero">
+        <div class="container grid">
+            <div class="container-text">
+                <h1>Rate and review</h1>
+                <h2>dorms in Latkrabang!</h2>
+                <p>A website for students to rate and review their dorms in Latkrabang.</p>
+                <a href="about.html" class="btn">Read more</a>
+        </div>
+        <!-- Images of dorms -->
+        <div class="hero-images">
+            <div class="column">
+                <img src="images/dorm1.jpg" alt="dorm1" style="width: 100%;"/>
             </div>
-        <!-- </div> -->
-    </section><!--/#main-slider-->
+            <div class="column">
+                <img src="images/dorm2.jpg" alt="dorm2" style="width: 100%;"/>
+            </div>
+            <div class="column">
+                <img src="images/dorm3.jpg" alt="dorm3" style="width: 100%;"/>
+            </div>
+            </div>
+        </div>
+    </section>
+    <!-- end slider -->
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

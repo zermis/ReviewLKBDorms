@@ -12,7 +12,7 @@ def connect():
         cur = conn.cursor()
        
         # Create dorm table
-        create_dorm_table()
+        # create_dorm_table()
 
         conn.commit()
         cur.close()
