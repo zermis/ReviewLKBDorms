@@ -7,11 +7,11 @@
 }
 
 .hero h1 {
-    font-size: 40px;
+    font-size: 2.5em;
 }
 
 .hero h2 {
-    font-size: 40px;
+    font-size: 2.5em;
     color: var(--secondary-color);
 }
 
@@ -33,21 +33,4 @@
     transform: scale(0.98);
 }
 
-/* Dorm images */
-.hero-images {
-    display: flex;
-    /* background-color: #fff; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* height: 350px; */
-    /* width: 640px; */
-    /* gap: 20px; */
-    /* padding: 20px; */
-    /* z-index: 100; */
-    /* justify-self: flex-end; */
-}
 
-.column {
-    flex: 33.33%;
-    padding: 5px;
-}
