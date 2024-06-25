@@ -1,9 +1,10 @@
-/* hero text*/
+/* hero section */
 .hero {
     background-color: var(--primary-color);
     color: #fff;
     position: relative;
     height: 400px;
+    overflow: hidden;
 }
 
 .hero h1 {
@@ -33,4 +34,49 @@
     transform: scale(0.98);
 }
 
+.dorm-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
 
+.dorm-images img {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Media queries */
+/* Tablets and under */
+@media (max-width: 768px) {
+    .hero .grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .hero {
+        height: auto;
+        padding: 40px 0;
+    }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    .hero .grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero {
+        height: auto;
+        padding: 10px 0;
+    }
+    
+    .dorm-images {
+        grid-template-columns: 1fr;
+        justify-self: center;
+    }
+        
+    .dorm-images img {
+        width: 100%;   
+    }
+}

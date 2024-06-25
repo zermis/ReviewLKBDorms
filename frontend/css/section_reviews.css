@@ -1,6 +1,7 @@
-/* Dorms Reviews */
+/* reviews section */
 :root {
     --headline: #A0A0A0;
+    --headline-border: #808080;
     --review-box: #f0f0f0;
 }
 
@@ -8,6 +9,7 @@
     height: 100px;
     align-content: center;
     background-color: var(--headline);
+    border-top: 10px solid var(--headline-border);
 }
 
 .title h3 {
@@ -15,25 +17,22 @@
     font-size: 2em;
 }
 
-.reviews {
-    display: flex;  
-    justify-content: space-between;
-    align-items: center;
-    margin: 1em 0;
-}
-
 .reviews .dorm-container {
     background: var(--review-box);  
+    padding: 1em;
+    margin: 1em;
 }
 
 .reviews .col-md-5 {
     display: flex;
     justify-content: center;
+    padding: 1em;
+}
+
+.reviews .col-md-7 {
+    padding: 1em;
 }
 
 .reviews .col-md-5 img {
     max-width: 100%;
 }
-
-
-

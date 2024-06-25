@@ -2,7 +2,6 @@
     --primary-color: #333333;
     --secondary-color: #24af7a;
     --tertiary-color: #ffffff;
-    /* --quaternary-color: #000; */
 }
 
 * {
@@ -47,24 +46,16 @@ img {
     height: auto;
 }
 
-/* Tablets and under */
-@media(max-width: 768px) {
-    
-}
-
-/* Mobile */
-@media(max-width: 500px) {
-}
-
-
-
-
-
-/* Nav background color */
+/* ===================== 
+    Navbar
+====================== */
 .nav-bg-color {
     background-color: var(--primary-color);
 }
 
+/* ===================== 
+    footer 
+====================== */
 .ft-bg-color {
     background-color: var(--secondary-color);
     color: var(--tertiary-color);
@@ -84,7 +75,32 @@ img {
     align-items: center;
 }
 
-/* Utility */
+/* ===================== 
+    footer media queries
+====================== */
+
+/* Tablets and under */
+@media(max-width: 768px) {
+
+    .footer .grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}  
+
+/* Mobile */
+@media(max-width: 500px) {
+    
+
+    .footer .grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+/* ===================== 
+    Utilities
+====================== */
 .container {
     max-width: 1100px;
     margin: 0 auto; 
@@ -107,8 +123,6 @@ img {
 }
 
 .card {
-    /* background-color: var(--tertiary-color); */
-    /* color: #333; */
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     padding: 20px;
@@ -156,4 +170,3 @@ img {
 .py-5 {
     padding: 3rem 0;
 }
-
