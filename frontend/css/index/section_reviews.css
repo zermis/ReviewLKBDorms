@@ -12,11 +12,6 @@
     border-top: 10px solid var(--headline-border);
 }
 
-.title h3 {
-    text-align: center;
-    font-size: 2em;
-}
-
 .reviews .dorm-container {
     background: var(--review-box);  
     padding: 1em;

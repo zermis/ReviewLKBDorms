@@ -20,20 +20,6 @@
     margin: 30px 0;
 }
 
-.btn {
-    display: inline-block;
-    cursor: pointer;
-    background-color: var(--secondary-color);
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-}
-
-.btn:hover {
-    transform: scale(0.98);
-}
-
 .dorm-images {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

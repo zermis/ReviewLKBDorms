@@ -1,6 +1,7 @@
 import psycopg2
 from config import config
 from create_dorm_table import create_dorm_table
+from create_user_table import create_user_table
 
 def connect():
     conn = None
@@ -12,7 +13,8 @@ def connect():
         cur = conn.cursor()
        
         # Create dorm table
-        create_dorm_table()
+        # create_dorm_table()
+        create_user_table()
 
         conn.commit()
         cur.close()
