@@ -52,5 +52,6 @@ def create_dorm_table():
         print(error)
     finally:
         if conn is not None:
+            cur.close()
             conn.close()
             print('Database connection closed.')

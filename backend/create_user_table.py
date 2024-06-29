@@ -1,7 +1,7 @@
 import psycopg2
 from config import config
 from get_file_path import get_file_path
-import hashlib
+from passlib.hash import pbkdf2_sha256
 
 def create_user_table():
     conn = None
@@ -19,22 +19,28 @@ def create_user_table():
                 password VARCHAR(255) NOT NULL
             );
         '''
-        cur.execute(create_table)
+        # cur.execute(create_table)
         conn.commit()
     
+        # test users
         username1 = 'person1'
-        password1 = hashlib.sha256('person1password'.encode()).hexdigest()
+        password1 = pbkdf2_sha256.hash('person1password')
+        print(password1)
         username2 = 'person2'
-        password2 = hashlib.sha256('person2password'.encode()).hexdigest()
+        password2 = pbkdf2_sha256.hash('person2password')
         cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username1, password1))
         cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username2, password2))
         conn.commit()
+
+        
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
         if conn is not None:
+            cur.close()
             conn.close()
             print('Database connection closed.')
+
 
 
