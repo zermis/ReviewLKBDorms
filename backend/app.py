@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import psycopg2
 from config import config
 from passlib.hash import pbkdf2_sha256
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 '''
 The function converts query output to a json format.
@@ -77,8 +79,7 @@ def signup():
         # create new user
             cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hash_password  ))
             conn.commit()
-            return jsonify({"message": "User created successfully"}), 201
-            
+            return jsonify({"message": "User created successfully"}), 201            
     
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
