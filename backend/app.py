@@ -75,29 +75,26 @@ def signup():
                 return jsonify({"error": "Passwords do not match"}), 400
 
             hash_password = pbkdf2_sha256.hash(password)
-            print(f"hash_password: {hash_password}")
         # create new user
             cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hash_password  ))
             conn.commit()
-            return jsonify({"message": "User created successfully"}), 201            
+            return jsonify({"message": "User created successfully!"}), 201            
     
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        return jsonify({"error": "An error occurred during signup"}), 500
+        return jsonify({"error": "An error occurred during signup."}), 500
     finally:
         if conn is not None:
             cur.close()
             conn.close()
             print('Database connection closed.')
 
-            
-
 @app.route("/user/login", methods = ["POST"])
 def login():
     data = request.get_json()
 
     if not data or 'username' not in data or 'password' not in data:
-        return jsonify({"error": "Username and password are required"}), 400
+        return jsonify({"error": "Username and password are required."}), 400
     
     username = data['username']
     password = data['password']
@@ -113,13 +110,13 @@ def login():
         user = cur.fetchone()
 
         if user and pbkdf2_sha256.verify(password, user[1]):
-            return jsonify({"message": "Login successful", "username": user[0]}), 200
+            return jsonify({"message": "Login successful!", "username": user[0]}), 200
         else:
-            return jsonify({"error": "Invalid username or password"}), 400
+            return jsonify({"error": "Invalid username or password!"}), 400
     
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        return jsonify({"error": "An error occurred during login"}), 500
+        return jsonify({"error": "An error occurred during login."}), 500
     finally:
         if conn is not None:
             cur.close()
@@ -129,5 +126,3 @@ def login():
 if __name__ == "__main__":
     get_dorms()
     app.run(debug=True)
-
-    

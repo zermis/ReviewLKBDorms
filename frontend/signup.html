@@ -69,9 +69,13 @@
             </div>
             <div class="form-group">
                 <label for="inputPasswordAgain">Password</label>
-                <input type="password" class="form-control" id="inputPasswordAgain" placeholder="Enter Password again" required>
+                <input type="password" class="form-control" id="inputPasswordAgain" placeholder="Enter Password again"
+                    required>
             </div>
             <button type="submit" class="btn" id="signupButton">Submit</button>
+            <!-- server response: success or fail -->
+            <div id="successMessage" class="alert alert-success my-3" style="display: none;"></div>
+            <div id="errorMessage" class="alert alert-warning my-3" style="display: none;"></div>
         </div>
     </form>
     <!-- end signup form-->
