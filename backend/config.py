@@ -24,3 +24,25 @@ def config(filename='database.ini', section='postgresql'):
             'Section {0} not found in the {1} file'.format
             (section, filename))
     return db
+
+'''
+configs for flask app
+'''
+
+from dotenv import load_dotenv
+import os
+import redis
+
+load_dotenv()
+
+class ApplicationConfig:
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
+    SESSION_TYPE = "redis"
+    SESSION_PERMANENT = False
+    SESSION_USE_SIGNER = True
+    
+    SESSION_REDIS = redis.from_url("redis://127.0.0.1:6379")
+
+
+

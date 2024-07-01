@@ -1,11 +1,21 @@
-from flask import Flask, request, jsonify
+from config import ApplicationConfig
+from flask_session import Session
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 import psycopg2
 from config import config
 from passlib.hash import pbkdf2_sha256
+# from itsdangerous import (URLSafeTimedSerializer
+#                           as Serializer, BadSignature, SignatureExpired)
+# from functools import wraps
+# from flask_login import login_user, logout_user, login_required, current_user
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+app.config.from_object(ApplicationConfig)
+
+server_session = Session(app)
+# app.secret_key = 'ReviewLKBDorms'
+cors = CORS(app,  supports_credentials=True, resources={r"/*": {"origins": "http://127.0.0.1:5500"}})
 
 '''
 The function converts query output to a json format.
@@ -46,7 +56,7 @@ def get_dorms():
         if conn is not None:
             conn.close()
 
-@app.route("/user/signup", methods = ["POST"])
+@app.route("/register", methods = ["POST"])
 def signup():
     data = request.get_json()
 
@@ -75,7 +85,7 @@ def signup():
                 return jsonify({"error": "Passwords do not match"}), 400
 
             hash_password = pbkdf2_sha256.hash(password)
-        # create new user
+            # create new user
             cur.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hash_password  ))
             conn.commit()
             return jsonify({"message": "User created successfully!"}), 201            
@@ -89,7 +99,7 @@ def signup():
             conn.close()
             print('Database connection closed.')
 
-@app.route("/user/login", methods = ["POST"])
+@app.route("/login", methods = ["POST"])
 def login():
     data = request.get_json()
 
@@ -105,15 +115,52 @@ def login():
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         # verify user
-        cur.execute("SELECT username, password from users WHERE username = %s", (username,))
+        cur.execute("SELECT id, username, password from users WHERE username = %s", (username,))
         conn.commit()
         user = cur.fetchone()
 
-        if user and pbkdf2_sha256.verify(password, user[1]):
-            return jsonify({"message": "Login successful!", "username": user[0]}), 200
+        if user and pbkdf2_sha256.verify(password, user[2]):
+            session['user_id'] = user[0]
+            print('sessio after loggin in:', session)
+            return jsonify({"message": "Login successful!", "username": user[1]}), 200
         else:
             return jsonify({"error": "Invalid username or password!"}), 400
     
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+        return jsonify({"error": "An error occurred during login."}), 500
+    finally:
+        if conn is not None:
+            cur.close()
+            conn.close()
+            print('Database connection closed.')
+                
+
+@app.route("/@me", methods = ["GET"])
+def profile():
+    user_id = session.get("user_id")
+    print('session getting @me:', session)
+    print('user_id1:', user_id)
+    if not user_id:
+        return jsonify({"error": "User not logged in."}), 401
+
+    # use user_id to get user details
+    conn = None
+    try:
+        params = config()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute("SELECT id, username from users WHERE id = %s", (user_id,))
+        conn.commit()
+        user = cur.fetchone()
+        if user:
+            print('user:', user[1])
+            return jsonify({
+                "user_id": user_id,
+                "username": user[1]
+            }), 200
+        else:
+            return jsonify({"error": "User not logged in."}), 401
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
         return jsonify({"error": "An error occurred during login."}), 500

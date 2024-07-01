@@ -4,3 +4,8 @@ psycopg2
 pandas
 passlib
 flask-cors
+flask-session
+redis
+# flask-login
+# flask_httpauth
+# itsdangerous
