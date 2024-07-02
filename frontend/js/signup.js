@@ -44,10 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const protocol = "http";
     const host = "127.0.0.1";
     const port = 5000;
-    const url = `${protocol}://${host}:${port}/user/signup`;
+    const url = `${protocol}://${host}:${port}/register`;
 
     fetch(url, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
     },  
@@ -61,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
             displayMessage("success", data.message + " Redirecting to the login page...");
             // Redirect to the log in page after 2 seconds
             setTimeout(() => {
-              window.location.href = `${protocol}://${host}:5500/frontend/login.html`;
+              window.location.href = `/frontend/login.html`;
             }, 2000);
         } else if (data.error) {
             displayMessage('error', data.error);

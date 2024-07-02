@@ -18,7 +18,7 @@
 <body>
     <!-- start header -->
     <nav class="navbar navbar-expand-lg navbar-dark nav-bg-color">
-        <a class="navbar-brand" href="#">ReviewLKBDorms</a>
+        <a class="navbar-brand" href="index.html">ReviewLKBDorms</a>
         <!-- For responsive design, the navbar-toggler-icon is used to toggle the navbar items when the screen is small. -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <!-- Button to write a review - navigates to write_review.html -->
-            <button type="button" class="btn btn-outline-success">Write a Review</button>
+            <button onclick="window.location.href='write_review.html'" type="button" class="btn btn-outline-success">Write a Review</button>
             <!-- navbarSupportedContent - index, about, signup, login -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -46,7 +46,18 @@
                     <a class="nav-link" href="signup.html">Signup</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="login.html">Login</a>
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <li class="nav-item">
+                    <button id="logout-button" class="btn btn-outline-success" href="index.html">Logout</button>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                        </svg>    
+                    </a>
                 </li>
             </ul>
         </div>
@@ -68,7 +79,6 @@
                 <input type="password" class="form-control" id="inputPassword" placeholder="Password">
             </div>
             <button type="submit" class="btn">Submit</button>
-            <!-- server response: success or fail -->
             <div id="successMessage" class="alert alert-success my-3" style="display: none;"></div>
             <div id="errorMessage" class="alert alert-warning my-3" style="display: none;"></div>
         </div>
@@ -86,6 +96,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
     <script src="js/login.js"></script>
+    <script src="js/logout.js"></script>
     <!-- end js -->
 </body>
 

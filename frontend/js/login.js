@@ -41,24 +41,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const protocol = "http";
     const host = "127.0.0.1";
     const port = 5000;
-    const url = `${protocol}://${host}:${port}/user/login`;
+    const url = `${protocol}://${host}:${port}/login`;
 
     fetch(url, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log('Response Cookies:', res.headers.get('Set-Cookie')); // Log the cookies here
+        return res.json();
+      })
       .then((data) => {
         console.log(data);
         //display resopnseMessage paragraph from res
         if (data.message) {
             displayMessage("success", data.message + " Redirecting to the home page...");
+            console.log(data)
+            
             // Redirect to the home page after 2 seconds 
             setTimeout(() => {
-                window.location.href = `${protocol}://${host}:5500/frontend/index.html`;
+                window.location.href = `/frontend/profile.html`;
             }, 2000);
             
         } else if (data.error) {
@@ -70,3 +76,4 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+

@@ -1,3 +1,4 @@
+from flask_login import login_required
 from config import ApplicationConfig
 from flask_session import Session
 from flask import Flask, request, jsonify, session
@@ -15,7 +16,7 @@ app.config.from_object(ApplicationConfig)
 
 server_session = Session(app)
 # app.secret_key = 'ReviewLKBDorms'
-cors = CORS(app,  supports_credentials=True, resources={r"/*": {"origins": "http://127.0.0.1:5500"}})
+cors = CORS(app,  supports_credentials=True, resources={r"/*": {"origins": "*"}})
 
 '''
 The function converts query output to a json format.
@@ -134,13 +135,22 @@ def login():
             cur.close()
             conn.close()
             print('Database connection closed.')
+
+@app.route("/logout", methods=["POST", "GET"])
+def logout():
+    # Clear the user's session
+    print('loggin out')
+    print('session before logout:', session)
+    session.pop('user_id', default=None)
+
+    print('session after logout:', session)
+    return jsonify({"message": "Logged out successfully"}), 200
                 
 
 @app.route("/@me", methods = ["GET"])
 def profile():
     user_id = session.get("user_id")
     print('session getting @me:', session)
-    print('user_id1:', user_id)
     if not user_id:
         return jsonify({"error": "User not logged in."}), 401
 
