@@ -146,6 +146,12 @@ def logout():
     print('session after logout:', session)
     return jsonify({"message": "Logged out successfully"}), 200
                 
+@app.route("/check_auth", methods = ["GET"])
+def check_auth():
+    if 'user_id' in session:
+        return jsonify({"message": "User is authenticated"}), 200
+    else:
+        return jsonify({"error": "User is not authenticated"}), 401
 
 @app.route("/@me", methods = ["GET"])
 def profile():

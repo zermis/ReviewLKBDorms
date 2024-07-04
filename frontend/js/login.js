@@ -1,3 +1,5 @@
+import { handleAuth } from "./auth_handler.js";
+
 /* Function to display response message from the server
 args:
 - type: string
@@ -20,7 +22,8 @@ function displayMessage(type, message) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
+  await handleAuth();
   const form = document.querySelector("#login-form");
   form.addEventListener("submit", function (e) {
     e.preventDefault(); // Prevent the form from submitting normally

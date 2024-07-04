@@ -36,7 +36,7 @@
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
             <!-- Button to write a review - navigates to write_review.html -->
-            <button onclick="window.location.href='write_review.html'" type="button" class="btn btn-outline-success">Write a Review</button>
+            <button id="write_review_button" type="button" class="btn btn-outline-success">Write a Review</button>
             <!-- navbarSupportedContent - index, about, signup, login -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
@@ -46,13 +46,13 @@
                     <a class="nav-link" href="about.html">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="signup.html">Signup</a>
+                    <a id="signup_button" class="nav-link" href="signup.html" style="display: none;">Signup</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a id="login_button" class="nav-link" href="login.html" style="display: none;">Login</a>
                 </li>
                 <li class="nav-item">
-                    <button id="logout-button" class="btn btn-outline-success" href="index.html">Logout</button>
+                    <button id="logout_button" class="btn btn-sm" style="display: none;">Logout</button>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="profile.html">
@@ -89,8 +89,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <script src="js/profile.js"></script>
-    <script src="js/logout.js"></script>
+    <script src="js/profile.js" type="module"></script>
+    <script src="js/logout.js" type="module"></script>
+    <script src="js/index.js" type="module"></script>
     <!-- end js -->
 </body>
 
