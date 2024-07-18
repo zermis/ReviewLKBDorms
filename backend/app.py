@@ -1,11 +1,20 @@
 from flask_login import login_required
 from config import ApplicationConfig
 from flask_session import Session
-from flask import Flask, request, jsonify, session
+from flask import Flask, Response, request, jsonify, session
 from flask_cors import CORS
 import psycopg2
 from config import config
 from passlib.hash import pbkdf2_sha256
+import json
+import datetime
+
+def serialize_datetime(obj):
+    if isinstance(obj, datetime.datetime):
+        return obj.__str__()
+    raise TypeError("Type not serializable")
+
+dt = datetime.datetime.now()
 # from itsdangerous import (URLSafeTimedSerializer
 #                           as Serializer, BadSignature, SignatureExpired)
 # from functools import wraps
@@ -25,23 +34,35 @@ Arguments:
   query       - A query to be executed
 Return data output in json format.
 '''
+# def query_to_json(cursor, query):
+#     cursor.execute(query)
+#     columns = [desc[0] for desc in cursor.description]
+#     results = cursor.fetchall()
+#     features = []
+#     for row in results:
+#         properties = dict(zip(columns, row))
+#         feature = {"properties": properties}
+#         features.append(feature)
+#     feature_collection = {"type": "FeatureCollection", "features": features}
+#     return feature_collection
+
 def query_to_json(cursor, query):
     cursor.execute(query)
     columns = [desc[0] for desc in cursor.description]
     results = cursor.fetchall()
     features = []
     for row in results:
-        properties = dict(zip(columns, row))
-        feature = {"properties": properties}
+        feature = dict(zip(columns, row))
         features.append(feature)
-    feature_collection = {"type": "FeatureCollection", "features": features}
-    return feature_collection
+    # print(features)
+    return jsonify({"dorms": features})
+    
 
 @app.get("/")
 def home():
     return {"message": "Hello, King!"}
 
-@app.get("/dorms")
+@app.route("/dorms", methods = ["GET"])
 def get_dorms():
     conn = None
     try:
@@ -49,10 +70,39 @@ def get_dorms():
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
         dorms = query_to_json(cur, "SELECT * FROM dorms;")
-        return dorms
+        # print(dorms)
+        return dorms, 200
     
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+
+# id is like this a893d4a4-654a-41af-ae0c-ba3c68d63973
+# to get one dorm
+@app.route("/dorms/<id>", methods = ["GET"])
+def get_dorm(id):
+    conn = None
+    try:
+        params = config()
+        conn = psycopg2.connect(**params)
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM dorms WHERE id = %s;", (id,))
+        column_names = [desc[0] for desc in cur.description]
+        data = cur.fetchone()
+        if data:
+            # return jsonify({"dorm": data}), 200
+            result = dict(zip(column_names, data))
+            #jsonify the result and print it
+            result_json = json.dumps({"dorm": result}, ensure_ascii=False, default=serialize_datetime, indent=4)
+            return Response(result_json), 200
+        else:
+            return jsonify({"error": "Dorm not found"}), 404
+        
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("error in backend:", error)
+        return jsonify({"error": str(error)}), 500
     finally:
         if conn is not None:
             conn.close()
