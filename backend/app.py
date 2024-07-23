@@ -7,24 +7,11 @@ import psycopg2
 from config import config
 from passlib.hash import pbkdf2_sha256
 import json
-import datetime
-
-def serialize_datetime(obj):
-    if isinstance(obj, datetime.datetime):
-        return obj.__str__()
-    raise TypeError("Type not serializable")
-
-dt = datetime.datetime.now()
-# from itsdangerous import (URLSafeTimedSerializer
-#                           as Serializer, BadSignature, SignatureExpired)
-# from functools import wraps
-# from flask_login import login_user, logout_user, login_required, current_user
 
 app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
 
 server_session = Session(app)
-# app.secret_key = 'ReviewLKBDorms'
 cors = CORS(app,  supports_credentials=True, resources={r"/*": {"origins": "*"}})
 
 '''
@@ -34,18 +21,6 @@ Arguments:
   query       - A query to be executed
 Return data output in json format.
 '''
-# def query_to_json(cursor, query):
-#     cursor.execute(query)
-#     columns = [desc[0] for desc in cursor.description]
-#     results = cursor.fetchall()
-#     features = []
-#     for row in results:
-#         properties = dict(zip(columns, row))
-#         feature = {"properties": properties}
-#         features.append(feature)
-#     feature_collection = {"type": "FeatureCollection", "features": features}
-#     return feature_collection
-
 def query_to_json(cursor, query):
     cursor.execute(query)
     columns = [desc[0] for desc in cursor.description]
@@ -60,7 +35,7 @@ def query_to_json(cursor, query):
 
 @app.get("/")
 def home():
-    return {"message": "Hello, King!"}
+    return {"message": "The server is running!"}
 
 @app.route("/dorms", methods = ["GET"])
 def get_dorms():
@@ -81,8 +56,9 @@ def get_dorms():
 
 # id is like this a893d4a4-654a-41af-ae0c-ba3c68d63973
 # to get one dorm
-@app.route("/dorms/<id>", methods = ["GET"])
-def get_dorm(id):
+@app.route("/dorm", methods = ["GET"])
+def get_dorm():
+    id = request.args.get("id")
     conn = None
     try:
         params = config()
@@ -92,11 +68,9 @@ def get_dorm(id):
         column_names = [desc[0] for desc in cur.description]
         data = cur.fetchone()
         if data:
-            # return jsonify({"dorm": data}), 200
+            # for row in
             result = dict(zip(column_names, data))
-            #jsonify the result and print it
-            result_json = json.dumps({"dorm": result}, ensure_ascii=False, default=serialize_datetime, indent=4)
-            return Response(result_json), 200
+            return jsonify({"dorm": result}), 200
         else:
             return jsonify({"error": "Dorm not found"}), 404
         

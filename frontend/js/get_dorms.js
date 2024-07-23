@@ -7,7 +7,7 @@ async function getDorms() {
   const host = "127.0.0.1";
   const port = 5000;
   const id = "a893d4a4-654a-41af-ae0c-ba3c68d63973";
-  const url = `${protocol}://${host}:${port}/dorms/${id}`;
+  const url = `${protocol}://${host}:${port}/dorm?id=${id}`;
   console.log("URL:", url);
 
   try {
