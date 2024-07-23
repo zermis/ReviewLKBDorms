@@ -1,3 +1,10 @@
+'''
+app.py
+A python program to create a Flask application that connects to a PostgreSQL database
+and provides endpoints to get dorms, get a single dorm, register, login, logout, check_auth, and get user profile.
+              Created by Panupong Dangkajitpetch
+                      June 15th, 2024
+'''
 from flask_login import login_required
 from config import ApplicationConfig
 from flask_session import Session

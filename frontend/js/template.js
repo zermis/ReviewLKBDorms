@@ -1,3 +1,7 @@
+/*
+template.js
+- This file is a template for creating requests to the server.
+*/
 import { handleAuth } from "./auth_handler.js";
 
 document.addEventListener("DOMContentLoaded", async function () {

@@ -1,4 +1,15 @@
+/*
+signup.js
+- This is the main js file for the signup.html page.
+- It contains the code for signing up a new user.
+- When the user submits the signup form, a POST request is sent to the server to create a new user.
+- The server responds with a message indicating whether the signup was successful or not.
+- If the signup was successful, the user is redirected to the login page.
+- If the signup was unsuccessful, an error message is displayed.
+*/
+
 import { handleAuth } from "./auth_handler.js";
+
 /* Function to display response message from the server
 args:
 - type: string

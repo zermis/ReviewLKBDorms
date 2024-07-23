@@ -1,3 +1,9 @@
+'''
+main.py
+A python program to create a PostgreSQL database connection and create dorm and user tables.
+              Created by Panupong Dangkajitpetch
+                      June 15th, 2024
+'''
 import psycopg2
 from config import config
 from create_dorm_table import create_dorm_table

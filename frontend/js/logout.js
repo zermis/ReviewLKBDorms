@@ -1,3 +1,11 @@
+/*
+logout.js
+- This file contains the code for logging out the user.
+- When the user clicks the logout button, a POST request is sent to the server to log out the user.
+- If the logout is successful, the user is redirected to the login page.
+- If the logout is unsuccessful, an error message is displayed.
+*/
+
 import { handleAuth } from "./auth_handler.js";
 
 document.addEventListener("DOMContentLoaded", async function () {

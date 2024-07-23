@@ -1,3 +1,8 @@
+/*
+get_dorm.js
+- This file contains the code for getting a dorm information by using a id
+*/
+
 import { Dorm } from "../model/dorm.js";
 
 async function getDorms() {
@@ -39,12 +44,11 @@ async function getDorms() {
         <img src="images/dorm4.jpg" alt="dorm2">
       </div>
       <div class="col-md-7">
-        <h5>${dormData.nameEng} ${dormData.nameTh}</h5>
-        <p>${dormData.locationEng}</p>
-        <p>${dormData.locationTh}</p>
-        <p>Location: ${dormData.getFullAddress()}</p>
-        <p>Phone: ${dormData.phoneNum}</p>
-        <p>Details: ${dormData.details}</p>
+        <h5>${dormData.nameEng} (${dormData.nameTh})</h5>
+        <p><strong>Location Eng:</strong> ${dormData.locationEng}</p>
+        <p><strong>Location Th:</strong> ${dormData.locationTh}</p>
+        <p><strong>Phone:</strong> ${dormData.phoneNum}</p>
+        <p><strong>Details:</strong> ${dormData.details}</p>
       </div>
     `;
     dormContainer.appendChild(dormElement);

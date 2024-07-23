@@ -1,3 +1,10 @@
+/*
+auth_handler.js
+- This file contains the code for handling authentication.
+If the user is authenticated, the signup and login buttons will be hidden, and the logout button will be displayed.
+If the user is not authenticated, the signup and login buttons will be displayed, and the logout button will be hidden.
+*/
+
 import { checkAuth } from "./check_auth.js";
 
 let isFirstLoad = true;

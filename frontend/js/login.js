@@ -1,3 +1,12 @@
+/*
+login.js
+- This file contains the code for the login page.
+- When the user submits the login form, the form data is sent to the server.
+- The server responds with a message indicating whether the login was successful or not.
+- If the login was successful, the user is redirected to the home page.
+- If the login was unsuccessful, an error message is displayed.
+*/
+
 import { handleAuth } from "./auth_handler.js";
 
 /* Function to display response message from the server

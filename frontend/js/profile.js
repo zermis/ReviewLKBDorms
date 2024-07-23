@@ -1,3 +1,10 @@
+/*
+profile.js 
+- This is the main js file for the profile.html page.
+- It fetches the user profile data and displays the username.
+- If the user is not logged in, it displays an error message.
+*/
+
 import { handleAuth } from "./auth_handler.js";
 
 document.addEventListener("DOMContentLoaded", async function () {

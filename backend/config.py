@@ -4,9 +4,21 @@ A python program to configure the database connection
 by reading the database.ini file and returning the
 parameters to connect to the database.
               Created by Panupong Dangkajitpetch
-                      Oct 6, 2023
+                      June 15th, 2024
 '''
 from configparser import ConfigParser
+from dotenv import load_dotenv
+import os
+import redis
+
+load_dotenv()
+
+class ApplicationConfig:
+    SECRET_KEY = os.getenv('SECRET_KEY')
+    SESSION_TYPE = "redis"
+    SESSION_PERMANENT = False
+    SESSION_USE_SIGNER = True
+    SESSION_REDIS = redis.from_url("redis://127.0.0.1:6379")
 
 def config(filename='database.ini', section='postgresql'):
    
@@ -24,24 +36,3 @@ def config(filename='database.ini', section='postgresql'):
             'Section {0} not found in the {1} file'.format
             (section, filename))
     return db
-
-'''
-configs for flask app
-'''
-
-from dotenv import load_dotenv
-import os
-import redis
-
-load_dotenv()
-
-class ApplicationConfig:
-    SECRET_KEY = os.getenv('SECRET_KEY')
-
-    SESSION_TYPE = "redis"
-    SESSION_PERMANENT = False
-    SESSION_USE_SIGNER = True
-    SESSION_REDIS = redis.from_url("redis://127.0.0.1:6379")
-
-
-

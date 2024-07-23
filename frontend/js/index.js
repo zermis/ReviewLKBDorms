@@ -1,6 +1,11 @@
+/*
+index.js
+- This is the main js file for the index.html page.
+*/
+
 import { handleAuth } from "./auth_handler.js";
 import { checkAuth } from "./check_auth.js";
-import { getDorms } from "./get_dorms.js";
+import { getDorms } from "./get_dorm.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
   await handleAuth();

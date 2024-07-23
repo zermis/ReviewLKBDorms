@@ -1,3 +1,10 @@
+/*
+check_auth.js
+- This file contains the code for checking if the user is authenticated.
+If the user is authenticated, the message "user is authenticated" will be displayed.
+If the user is not authenticated, the message "user is not authenticated" will be displayed.
+*/
+
 export async function checkAuth() {
   return new Promise((resolve, reject) => {
     const protocol = "http";
