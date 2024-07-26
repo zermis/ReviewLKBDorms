@@ -5,11 +5,15 @@ index.js
 
 import { handleAuth } from "./auth_handler.js";
 import { checkAuth } from "./check_auth.js";
-import { getDorms } from "./get_dorm.js";
+// import { getDormById } from "./get_dorm.js";
+import { getDorms } from "./get_dorms_list.js";
+
 
 document.addEventListener("DOMContentLoaded", async function () {
   await handleAuth();
+  // await getDormById();
   await getDorms();
+
   const writeReviewButton = document.getElementById("write_review_button");
   writeReviewButton.addEventListener("click", async function () {
     console.log("Write Review button clicked");

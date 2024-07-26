@@ -5,7 +5,7 @@ get_dorm.js
 
 import { Dorm } from "../model/dorm.js";
 
-async function getDorms() {
+async function getDormById() {
   console.log("Getting dorms...");
 
   const protocol = "http";
@@ -58,4 +58,4 @@ async function getDorms() {
   }
 }
 
-export { getDorms };
+export { getDormById };
