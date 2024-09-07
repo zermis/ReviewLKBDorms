@@ -7,7 +7,7 @@ import { Dorm } from "../model/dorm.js";
 
 let allDorms = [];
 let currentPage = 1;
-const dormsPerPage = 10;
+const dormsPerPage = 5;
 const pageButtonsCount = 5;
 let currentPageGroup = 1;
 
@@ -52,12 +52,15 @@ function displayDorms() {
   // Clear existing content
   const dormContainer = document.getElementById("dorm_container_card");
   dormContainer.innerHTML = "";
-
+/* <div style="position: relative;">  
+    <button style="position: absolute; top: 0; right: 0;">Click Me</button>  
+    <!-- Other content -->  
+</div> */
   // Loop through each dorm in the response
   dormsToDisplay.forEach(dorm => {
     // Create element for each dorm
     const dormElement = document.createElement("div");
-    dormElement.classList.add("dorm-container", "card");
+    dormElement.classList.add("dorm-container", "card", "clickable-div");
     dormElement.innerHTML = `
       <div class="row">
         <div class="col-md-5">
@@ -73,6 +76,9 @@ function displayDorms() {
         </div>
       </div>
     `;
+    dormElement.addEventListener('click', function () {
+      window.location.href = `dorm_detail.html`;
+    });
     dormContainer.appendChild(dormElement);
   });
 }
